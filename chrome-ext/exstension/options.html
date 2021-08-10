@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        button {
+            height: 30px;
+            width: 80px;
+            outline: none;
+            margin: 10px;
+        }
+
+        .input-label {
+            display: inline-block;
+            width: 60px;
+            text-align: justify;
+        }
+
+        input {
+            display: inline-block;
+            width: 240px;
+        }
+    </style>
+    <script src="libs/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h1>设置唯一标识和昵称</h1>
+    <hr>
+    <label for="" class="input-label">唯一标识:</label>
+    <input type="text" name="unique_id" value="" required>
+    <hr>
+    <label for="" class="input-label">类型:</label>
+    <input type="text" name="type_name" value="" required>
+    <hr>
+    <label for="" class="input-label">昵称:</label>
+    <input type="text" name="nick_name" value="" required>
+    <hr>
+    <button id="submit">提交保存</button>
+    <span id="err_msg" style="color: red;"></span>
+</body>
+<script src="options.js"></script>
+
+</html>

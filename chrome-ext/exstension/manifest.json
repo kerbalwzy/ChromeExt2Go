@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+  "name": "SinRiu爬虫插件",
+  "version": "0.0.1",
+  "description": "插件根据后端编程指令, 操作Tab和Content-Script, 完成任意的爬虫任务",
+  "browser_action": {
+    "default_title": "SinRiu爬虫插件"
+  },
+  "background": {
+    "scripts": [
+      "libs/jquery-3.6.0.min.js",
+      "libs/socket.io.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "libs/jquery-3.6.0.min.js",
+        "libs/html2canvas.min.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "update_url": "http://nowkin.com:43999/chrome-ext-update/SRChromeExtSpider/chrome-ext-update.xml"
+}
