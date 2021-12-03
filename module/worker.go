@@ -1,4 +1,4 @@
-package chromeext2go
+package module
 
 import (
 	"crypto/md5"

@@ -5,10 +5,11 @@ import (
 	"github.com/googollee/go-socket.io/engineio/transport"
 	"github.com/googollee/go-socket.io/engineio/transport/polling"
 	"github.com/googollee/go-socket.io/engineio/transport/websocket"
-	chromeext2go "github.com/kerbalwzy/chrome-ext2go"
+	chromeExt2Go "github.com/kerbalwzy/chrome-ext2go/module"
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 var allowOriginFunc = func(r *http.Request) bool {
@@ -20,7 +21,7 @@ func init() {
 }
 
 func main() {
-	server := chromeext2go.NewServer(&engineio.Options{
+	manager := chromeExt2Go.NewManager(&engineio.Options{
 		Transports: []transport.Transport{
 			&polling.Transport{
 				CheckOrigin: allowOriginFunc,
@@ -30,7 +31,15 @@ func main() {
 			},
 		},
 	})
-	http.Handle("/socket.io/", server)
-	log.Println("Serving at :45321...")
-	log.Fatal(http.ListenAndServe("0.0.0.0:45321", nil))
+	go func() {
+		if err := manager.SocketIoSrv.Serve(); err != nil {
+			log.Fatalf("socketio listen error: %s\n", err)
+		}
+	}()
+	manager.SetPingInterval(time.Second * 10)
+	manager.GetLogger().SetLevel(chromeExt2Go.Info)
+	defer func() { _ = manager.SocketIoSrv.Close() }()
+	http.Handle("/socket.io/", manager.SocketIoSrv)
+	log.Println("Serving at: 0.0.0.0:54321")
+	log.Fatal(http.ListenAndServe("0.0.0.0:54321", nil))
 }
