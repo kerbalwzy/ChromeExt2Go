@@ -52,7 +52,6 @@ func NewManager(opts *engineio.Options) *Manager {
 				delete(manager.connLastPingAt, conn.ID())
 				manager.logger.Debug("Close ping: conn.ID =", conn.ID())
 			}()
-			// 每五秒ping一次客户端
 			for {
 				if conn.Context().(string) == "disconnected" {
 					break
