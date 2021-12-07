@@ -5,7 +5,7 @@ const {fastKey} = require("core-js/internals/internal-metadata");
 // Generate pages object
 const pagesObj = {};
 
-const chromeName = ["popup"];
+const chromeName = ["console"];
 
 chromeName.forEach(name => {
     pagesObj[name] = {
@@ -25,12 +25,8 @@ const plugins = [
         to: `${path.resolve("dist")}/js/background.js`
     },
     {
-        from: path.resolve("src/hot-reload.js"),
-        to: `${path.resolve("dist")}/js/hot-reload.js`
-    },
-    {
-        from: path.resolve("src/socket.io.1.2.0.js"),
-        to: `${path.resolve("dist")}/js/socket.io.1.2.0.js`
+        from: path.resolve("src/libs"),
+        to: `${path.resolve("dist")}/libs`
     },
     {
         from: path.resolve("src/assets"),

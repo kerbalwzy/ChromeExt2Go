@@ -9,19 +9,27 @@
     "128": "assets/logo.png"
   },
   "browser_action": {
-    "default_popup": "html/popup.html",
     "default_icon": "assets/logo.png"
   },
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "background": {
     "scripts": [
-      "js/hot-reload.js",
-      "js/socket.io.1.2.0.js",
+      "libs/hot-reload.js",
+      "libs/socket.io.1.2.0.js",
       "js/background.js"
     ]
   },
   "web_accessible_resources": [
     "fonts/*",
     "assets/*"
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies"
   ]
 }
